@@ -8,6 +8,6 @@ import (
 
 func Healthy(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, gin.H{
-		"mensage servidor on": "Bomm dia diretoria de gestão de pessoas",
+		"mensage servidor on": "Bomm dia mellllllllllllllllllllllllllllllllllllllllllllll",
 	})
 }

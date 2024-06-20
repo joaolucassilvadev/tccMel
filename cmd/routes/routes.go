@@ -11,23 +11,18 @@ func CategoryRoutes(r *gin.Engine) {
 	categoryRoutes := r.Group("/categories")
 	categoryRepository := repositories.NewCategoryRepository()
 
-	// Rota para criar uma nova categoria
 	categoryRoutes.POST("/createCategory", func(ctx *gin.Context) {
 		controller.CreateCategory(ctx, categoryRepository)
 	})
 
-	// Outras operações relacionadas a categorias...
-
-	// Rotas para administradores
 	adminRoutes := r.Group("/administrators")
 	administradorRepository := repositories.NewAdministradorRepository()
 
-	// Rota para criar um novo administrador
 	adminRoutes.POST("/createAdministrator", func(ctx *gin.Context) {
 		controller.CreateAdmistrador(ctx, administradorRepository)
 	})
-
-	// Outras operações relacionadas a administradores...
+	r.POST("/login", controller.Login)
+	r.POST("/dateformulario", controller.DataController)
 }
 
 // Healthy é um exemplo de rota para verificar a saúde do serviço

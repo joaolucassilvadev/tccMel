@@ -8,7 +8,6 @@ import (
 	usecases "microservicos.com/internal/use-cases"
 )
 
-// aqui vamos utilizar como dto, por isso está em minusculo
 type createCategoryInput struct {
 	Name string `json:"name" binding:"required"`
 
