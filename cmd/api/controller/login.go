@@ -2,6 +2,8 @@ package controller
 
 import (
 	"fmt"
+	"net/http"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
@@ -10,10 +12,12 @@ import (
 	//"microservicos.com/pkg/util"
 )
 
-// Login handles user login and returns a JWT token if credentials are correct
 func Login(ctx *gin.Context) {
+	now := time.Now()
+
 	var p entites.Login
 	var user entites.Administrador
+	var dataForm entites.DateFormulario
 
 	db := config.GetDatabase()
 
@@ -23,8 +27,7 @@ func Login(ctx *gin.Context) {
 		})
 		return
 	}
-	// tentei transforma em um middlewares mas não conseguir, tentar novamente pelo turno da noite
-	// Check if the user with the provided CPF exists in the database
+
 	if err := db.Where("email = ?", p.Email).First(&user).Error; err != nil {
 		fmt.Printf("nome do email %s", p.Email)
 		if err == gorm.ErrRecordNotFound {
@@ -38,9 +41,23 @@ func Login(ctx *gin.Context) {
 		}
 		return
 	}
-	fmt.Print(user.Password)
+	config.DB.Find(&dataForm)
+	fmt.Print(dataForm.DateFim)
 
-	ctx.JSON(200, gin.H{
-		"token": user,
+	fim, err := time.Parse("2006-01-02", dataForm.DateFim)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Invalid date_fim format"})
+		return
+	}
+
+	if fim.Before(now) {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"mensagem de erro": "A data para inscrição do formulário já passou",
+		})
+		return
+	}
+
+	ctx.JSON(http.StatusOK, gin.H{
+		"mensagem": "Login realizado com sucesso",
 	})
 }
