@@ -20,11 +20,12 @@ func CategoryRoutes(r *gin.Engine) {
 	adminRoutes.POST("/createAdministrator", func(ctx *gin.Context) {
 		controller.CreateAdmistrador(ctx, administradorRepository)
 	})
-	r.POST("/login", controller.Login)
-	r.POST("/dateformulario", controller.DataController)
-	r.POST("/formulario", controller.CreateFormularioController)
 }
 
 func Healthy(r *gin.Engine) {
 	r.GET("/healthy", controller.Healthy)
+	r.POST("/login", controller.Login)
+	r.POST("/dateformulario", controller.DataController)
+	r.POST("/formulario", controller.CreateFormularioController)
+	r.POST("/loginAdm", controller.LoginAdm)
 }

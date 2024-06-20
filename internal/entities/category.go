@@ -13,6 +13,10 @@ type Login struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`
 }
+type Loginengresso struct {
+	Cpf            string `json:"cpf" gorm:"unique"`
+	DataNascimento string `json:"data_nascimento"`
+}
 type Engresso struct {
 	ID             uint   `gorm:"primaryKey"`
 	Name           string `json:"name"`
