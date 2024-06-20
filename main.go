@@ -9,7 +9,7 @@ import (
 
 func main() {
 	config.Connect()
-	config.DB.AutoMigrate(entites.Engresso{}, entites.Administrador{}, entites.DateFormulario{})
+	config.DB.AutoMigrate(entites.Engresso{}, entites.Administrador{}, entites.DateFormulario{}, entites.Formulario{})
 	r := gin.Default()
 
 	routes.Healthy(r)

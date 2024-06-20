@@ -6,7 +6,6 @@ import (
 	"microservicos.com/internal/repositories"
 )
 
-// CategoryRoutes configura as rotas para manipular entidades de categoria
 func CategoryRoutes(r *gin.Engine) {
 	categoryRoutes := r.Group("/categories")
 	categoryRepository := repositories.NewCategoryRepository()
@@ -23,9 +22,9 @@ func CategoryRoutes(r *gin.Engine) {
 	})
 	r.POST("/login", controller.Login)
 	r.POST("/dateformulario", controller.DataController)
+	r.POST("/formulario", controller.CreateFormularioController)
 }
 
-// Healthy é um exemplo de rota para verificar a saúde do serviço
 func Healthy(r *gin.Engine) {
 	r.GET("/healthy", controller.Healthy)
 }

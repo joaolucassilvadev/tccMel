@@ -1,6 +1,8 @@
 package entites
 
-import "time"
+import (
+	"time"
+)
 
 type Administrador struct {
 	Name     string `json:"name"`
@@ -12,17 +14,19 @@ type Login struct {
 	Password string `json:"password"`
 }
 type Engresso struct {
-	ID             uint
+	ID             uint   `gorm:"primaryKey"`
 	Name           string `json:"name"`
-	Cpf            string `json:"Cpf"gorm:"unique"`
+	Cpf            string `json:"cpf" gorm:"unique"`
 	DataNascimento string `json:"data_nascimento"`
 }
 
 type DateFormulario struct {
-	Id         int
-	DateInicio time.Time `json:"date_inicio"`
-	DateFim    time.Time `json:"date_fim"`
+	ID         uint   `gorm:"primaryKey"`
+	DateInicio string `json:"date_inicio"`
+	DateFim    string `json:"date_fim"`
+	create     time.Time
 }
+
 type Genero string
 
 const (
@@ -32,10 +36,8 @@ const (
 	NAO_DESEJO_INFORMAR Genero = "Não Desejo Informar"
 )
 
-type formulario struct {
-	Id uint
-	//	NomeCompleto              string `json:"nome_completo"`
-	//	DataNascimento            string `json:"data_nascimento"`
+type Formulario struct {
+	ID                        uint   `gorm:"primaryKey"`
 	Genero                    Genero `json:"genero"`
 	PaisResidencia            string `json:"pais_residencia"`
 	CidadeResidencia          string `json:"cidade_residencia"`
@@ -50,7 +52,8 @@ type formulario struct {
 	Ramo                      string `json:"ramo"`
 	FaixaSalarial             string `json:"faixa_salarial"`
 	AtuacaoDocencia           bool   `json:"atuacao_docencia"`
-	idengresso                Engresso
+	EngressoID                uint   `json:"engresso_id"`
+	Engresso                  Engresso
 }
 
 func NewEngresso(name, cpf, dataNascimento string) (*Engresso, error) {
