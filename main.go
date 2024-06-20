@@ -15,5 +15,5 @@ func main() {
 	routes.Healthy(r)
 	routes.CategoryRoutes(r)
 
-	r.Run(":5000")
+	r.Run(":10000")
 }
