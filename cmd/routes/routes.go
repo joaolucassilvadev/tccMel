@@ -29,4 +29,5 @@ func Healthy(r *gin.Engine) {
 	r.POST("/dateformulario", controller.DataController)
 	r.POST("/formulario", controller.CreateFormularioController)
 	r.POST("/loginAdm", controller.LoginAdm)
+	r.PUT("/EditData", controller.EditData)
 }

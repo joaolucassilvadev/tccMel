@@ -17,6 +17,33 @@
     },
     "basePath": "/",
     "paths": {
+        "/EditData": {
+            "put": {
+                "description": "Permite editar a data de fim de um formulário existente.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "formulario"
+                ],
+                "summary": "Editar a data de fim de um formulário",
+                "parameters": [
+                    {
+                        "description": "Dados para edição da data de fim do formulário",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entites.DateFormulario"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
         "/administrators/createAdministrator": {
             "post": {
                 "description": "coloca os dados do admistrador como name, email  e senha.",
