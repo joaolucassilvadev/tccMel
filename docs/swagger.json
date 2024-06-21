@@ -17,6 +17,33 @@
     },
     "basePath": "/",
     "paths": {
+        "/administrators/createAdministrator": {
+            "post": {
+                "description": "coloca os dados do admistrador como name, email  e senha.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "criar admistrador",
+                "parameters": [
+                    {
+                        "description": "Dados da admistrador",
+                        "name": "login",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entites.Administrador"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
         "/categories/createCategory": {
             "post": {
                 "description": "para realizar o cadastros do engresso precisa name,cpf,data nascimento.",
@@ -154,6 +181,20 @@
         }
     },
     "definitions": {
+        "entites.Administrador": {
+            "type": "object",
+            "properties": {
+                "Password": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
         "entites.DateFormulario": {
             "type": "object",
             "properties": {

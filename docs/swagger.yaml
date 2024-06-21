@@ -1,5 +1,14 @@
 basePath: /
 definitions:
+  entites.Administrador:
+    properties:
+      Password:
+        type: string
+      email:
+        type: string
+      name:
+        type: string
+    type: object
   entites.DateFormulario:
     properties:
       date_fim:
@@ -96,6 +105,24 @@ info:
   title: Microservices API
   version: "1.0"
 paths:
+  /administrators/createAdministrator:
+    post:
+      consumes:
+      - application/json
+      description: coloca os dados do admistrador como name, email  e senha.
+      parameters:
+      - description: Dados da admistrador
+        in: body
+        name: login
+        required: true
+        schema:
+          $ref: '#/definitions/entites.Administrador'
+      produces:
+      - application/json
+      responses: {}
+      summary: criar admistrador
+      tags:
+      - auth
   /categories/createCategory:
     post:
       consumes:

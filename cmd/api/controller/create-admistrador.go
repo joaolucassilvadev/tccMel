@@ -8,7 +8,6 @@ import (
 	usecases "microservicos.com/internal/use-cases"
 )
 
-// aqui vamos utilizar como dto, por isso está em minusculo
 type createLogin struct {
 	Name string `json:"name" binding:"required"`
 
@@ -16,6 +15,14 @@ type createLogin struct {
 	senha string `json:"senha"`
 }
 
+// Login godoc
+// @Summary criar admistrador
+// @Description coloca os dados do admistrador como name, email  e senha.
+// @Tags auth
+// @Accept  json
+// @Produce  json
+// @Param   login  body  entites.Administrador  true  "Dados da admistrador"
+// @Router /administrators/createAdministrator [post]
 func CreateAdmistrador(ctx *gin.Context, repository repositories.IRepositoriess) {
 	var body createLogin
 	if err := ctx.ShouldBindJSON(&body); err != nil {
