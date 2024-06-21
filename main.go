@@ -10,7 +10,7 @@ import (
 	entites "microservicos.com/internal/entities"
 )
 
-// @title Microservices API
+// @title TCC mel
 // @version 1.0
 // @description Esta é a documentação da API dos microserviços.
 // @termsOfService http://swagger.io/terms/

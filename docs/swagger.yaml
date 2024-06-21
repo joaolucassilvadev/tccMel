@@ -102,7 +102,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: http://swagger.io/terms/
-  title: Microservices API
+  title: TCC mel
   version: "1.0"
 paths:
   /EditData:
@@ -195,6 +195,17 @@ paths:
       summary: Criar um novo formulário
       tags:
       - formulario
+  /healthy:
+    get:
+      consumes:
+      - application/json
+      description: essa rota server pra saber se nosso service tá on.
+      produces:
+      - application/json
+      responses: {}
+      summary: service on
+      tags:
+      - auth
   /login:
     post:
       consumes:

@@ -159,6 +159,22 @@ const docTemplate = `{
                 "responses": {}
             }
         },
+        "/healthy": {
+            "get": {
+                "description": "essa rota server pra saber se nosso service tá on.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "service on",
+                "responses": {}
+            }
+        },
         "/login": {
             "post": {
                 "description": "Realiza o login do engresso com cpf e data.",
@@ -367,7 +383,7 @@ var SwaggerInfo = &swag.Spec{
 	Host:             "",
 	BasePath:         "/",
 	Schemes:          []string{},
-	Title:            "Microservices API",
+	Title:            "TCC mel",
 	Description:      "Esta é a documentação da API dos microserviços.",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
