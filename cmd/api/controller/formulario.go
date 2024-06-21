@@ -29,6 +29,14 @@ type FormularioDTO struct {
 	DateFim                   time.Time      `json:"date_fim"`
 }
 
+// CreateFormularioController godoc
+// @Summary Criar um novo formulário
+// @Description Cria um novo formulário com base nos dados fornecidos do engresso.
+// @Tags formulario
+// @Accept json
+// @Produce json
+// @Param formulario body entites.Formulario true "Dados do formulário a ser criado"
+// @Router /formulario [post]
 func CreateFormularioController(ctx *gin.Context) {
 	var formDTO FormularioDTO
 

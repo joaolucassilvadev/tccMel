@@ -9,12 +9,19 @@ import (
 )
 
 type createCategoryInput struct {
-	Name string `json:"name" binding:"required"`
-
+	Name            string `json:"name" binding:"required"`
 	Cpf             string `json:"cpf" binding:"required"`
 	Data_Nascimento string `json:"data_nascimento"`
 }
 
+// Login godoc
+// @Summary create engresso
+// @Description para realizar o cadastros do engresso precisa name,cpf,data nascimento.
+// @Tags auth
+// @Accept  json
+// @Produce  json
+// @Param   login  body  entites.Engresso  true  "Dados ebresso"
+// @Router /categories/createCategory [post]
 func CreateCategory(ctx *gin.Context, repository repositories.IRepositories) {
 	var body createCategoryInput
 	if err := ctx.ShouldBindJSON(&body); err != nil {

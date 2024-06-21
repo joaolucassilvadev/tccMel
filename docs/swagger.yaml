@@ -1,10 +1,86 @@
 basePath: /
 definitions:
+  entites.DateFormulario:
+    properties:
+      date_fim:
+        type: string
+      date_inicio:
+        type: string
+      id:
+        type: integer
+    type: object
+  entites.Engresso:
+    properties:
+      cpf:
+        type: string
+      data_nascimento:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+  entites.Formulario:
+    properties:
+      ano_conclusao_graduacao:
+        type: string
+      ano_conclusao_pos_graduacao:
+        type: string
+      ano_inicio_pos_graduacao:
+        type: string
+      atuacao_docencia:
+        type: boolean
+      cidade_residencia:
+        type: string
+      engresso:
+        $ref: '#/definitions/entites.Engresso'
+      engresso_id:
+        type: integer
+      estado_residencia:
+        type: string
+      faixa_salarial:
+        type: string
+      genero:
+        $ref: '#/definitions/entites.Genero'
+      graduacao_realizada:
+        type: integer
+      id:
+        type: integer
+      instituicao_trabalho:
+        type: string
+      linha_pesquisa_pos_graduacao:
+        type: integer
+      pais_residencia:
+        type: string
+      ramo:
+        type: string
+      trabalhando_atualmente:
+        type: boolean
+    type: object
+  entites.Genero:
+    enum:
+    - Feminino
+    - Masculino
+    - Não-Binário
+    - Não Desejo Informar
+    type: string
+    x-enum-varnames:
+    - Feminino
+    - Masculino
+    - NAO_BINARIO
+    - NAO_DESEJO_INFORMAR
   entites.Login:
     properties:
       email:
         type: string
       password:
+        type: string
+    type: object
+  entites.Loginengresso:
+    properties:
+      cpf:
+        type: string
+      data_nascimento:
         type: string
     type: object
 info:
@@ -20,13 +96,85 @@ info:
   title: Microservices API
   version: "1.0"
 paths:
+  /categories/createCategory:
+    post:
+      consumes:
+      - application/json
+      description: para realizar o cadastros do engresso precisa name,cpf,data nascimento.
+      parameters:
+      - description: Dados ebresso
+        in: body
+        name: login
+        required: true
+        schema:
+          $ref: '#/definitions/entites.Engresso'
+      produces:
+      - application/json
+      responses: {}
+      summary: create engresso
+      tags:
+      - auth
+  /dateformulario:
+    post:
+      consumes:
+      - application/json
+      description: coloca a data de inicio e a data de fim.
+      parameters:
+      - description: Dados da data
+        in: body
+        name: login
+        required: true
+        schema:
+          $ref: '#/definitions/entites.DateFormulario'
+      produces:
+      - application/json
+      responses: {}
+      summary: Data do tempo de formulari
+      tags:
+      - auth
+  /formulario:
+    post:
+      consumes:
+      - application/json
+      description: Cria um novo formulário com base nos dados fornecidos do engresso.
+      parameters:
+      - description: Dados do formulário a ser criado
+        in: body
+        name: formulario
+        required: true
+        schema:
+          $ref: '#/definitions/entites.Formulario'
+      produces:
+      - application/json
+      responses: {}
+      summary: Criar um novo formulário
+      tags:
+      - formulario
+  /login:
+    post:
+      consumes:
+      - application/json
+      description: Realiza o login do engresso com cpf e data.
+      parameters:
+      - description: Dados de Login
+        in: body
+        name: login
+        required: true
+        schema:
+          $ref: '#/definitions/entites.Loginengresso'
+      produces:
+      - application/json
+      responses: {}
+      summary: Login do usuário
+      tags:
+      - auth
   /loginAdm:
     post:
       consumes:
       - application/json
-      description: Realiza o login do usuário utilizando CPF.
+      description: Realiza o login do Adm utilizando o email e cpf.
       parameters:
-      - description: Dados de Login
+      - description: Dados de Login ADM
         in: body
         name: login
         required: true
@@ -35,7 +183,7 @@ paths:
       produces:
       - application/json
       responses: {}
-      summary: Login do usuário
+      summary: Login do adm
       tags:
       - auth
 securityDefinitions:

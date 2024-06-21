@@ -14,6 +14,14 @@ type date struct {
 	datafim    time.Time
 }
 
+// Login godoc
+// @Summary Data do tempo de formulari
+// @Description coloca a data de inicio e a data de fim.
+// @Tags auth
+// @Accept  json
+// @Produce  json
+// @Param   login  body  entites.DateFormulario  true  "Dados da data"
+// @Router /dateformulario [post]
 func DataController(ctx *gin.Context) {
 	var formDTO entites.DateFormulario
 

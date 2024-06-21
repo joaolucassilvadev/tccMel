@@ -12,12 +12,12 @@ import (
 )
 
 // Login godoc
-// @Summary Login do usuário
-// @Description Realiza o login do usuário utilizando CPF.
+// @Summary Login do adm
+// @Description Realiza o login do Adm utilizando o email e cpf.
 // @Tags auth
 // @Accept  json
 // @Produce  json
-// @Param   login  body  entites.Login  true  "Dados de Login"
+// @Param   login  body  entites.Login  true  "Dados de Login ADM"
 // @Router /loginAdm [post]
 func LoginAdm(ctx *gin.Context) {
 	var p entites.Login

@@ -24,9 +24,90 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/loginAdm": {
+        "/categories/createCategory": {
             "post": {
-                "description": "Realiza o login do usuário utilizando CPF.",
+                "description": "para realizar o cadastros do engresso precisa name,cpf,data nascimento.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "create engresso",
+                "parameters": [
+                    {
+                        "description": "Dados ebresso",
+                        "name": "login",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entites.Engresso"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/dateformulario": {
+            "post": {
+                "description": "coloca a data de inicio e a data de fim.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Data do tempo de formulari",
+                "parameters": [
+                    {
+                        "description": "Dados da data",
+                        "name": "login",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entites.DateFormulario"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/formulario": {
+            "post": {
+                "description": "Cria um novo formulário com base nos dados fornecidos do engresso.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "formulario"
+                ],
+                "summary": "Criar um novo formulário",
+                "parameters": [
+                    {
+                        "description": "Dados do formulário a ser criado",
+                        "name": "formulario",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entites.Formulario"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/login": {
+            "post": {
+                "description": "Realiza o login do engresso com cpf e data.",
                 "consumes": [
                     "application/json"
                 ],
@@ -44,6 +125,33 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
+                            "$ref": "#/definitions/entites.Loginengresso"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/loginAdm": {
+            "post": {
+                "description": "Realiza o login do Adm utilizando o email e cpf.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Login do adm",
+                "parameters": [
+                    {
+                        "description": "Dados de Login ADM",
+                        "name": "login",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
                             "$ref": "#/definitions/entites.Login"
                         }
                     }
@@ -53,6 +161,108 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "entites.DateFormulario": {
+            "type": "object",
+            "properties": {
+                "date_fim": {
+                    "type": "string"
+                },
+                "date_inicio": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "entites.Engresso": {
+            "type": "object",
+            "properties": {
+                "cpf": {
+                    "type": "string"
+                },
+                "data_nascimento": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "entites.Formulario": {
+            "type": "object",
+            "properties": {
+                "ano_conclusao_graduacao": {
+                    "type": "string"
+                },
+                "ano_conclusao_pos_graduacao": {
+                    "type": "string"
+                },
+                "ano_inicio_pos_graduacao": {
+                    "type": "string"
+                },
+                "atuacao_docencia": {
+                    "type": "boolean"
+                },
+                "cidade_residencia": {
+                    "type": "string"
+                },
+                "engresso": {
+                    "$ref": "#/definitions/entites.Engresso"
+                },
+                "engresso_id": {
+                    "type": "integer"
+                },
+                "estado_residencia": {
+                    "type": "string"
+                },
+                "faixa_salarial": {
+                    "type": "string"
+                },
+                "genero": {
+                    "$ref": "#/definitions/entites.Genero"
+                },
+                "graduacao_realizada": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "instituicao_trabalho": {
+                    "type": "string"
+                },
+                "linha_pesquisa_pos_graduacao": {
+                    "type": "integer"
+                },
+                "pais_residencia": {
+                    "type": "string"
+                },
+                "ramo": {
+                    "type": "string"
+                },
+                "trabalhando_atualmente": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "entites.Genero": {
+            "type": "string",
+            "enum": [
+                "Feminino",
+                "Masculino",
+                "Não-Binário",
+                "Não Desejo Informar"
+            ],
+            "x-enum-varnames": [
+                "Feminino",
+                "Masculino",
+                "NAO_BINARIO",
+                "NAO_DESEJO_INFORMAR"
+            ]
+        },
         "entites.Login": {
             "type": "object",
             "properties": {
@@ -60,6 +270,17 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "entites.Loginengresso": {
+            "type": "object",
+            "properties": {
+                "cpf": {
+                    "type": "string"
+                },
+                "data_nascimento": {
                     "type": "string"
                 }
             }

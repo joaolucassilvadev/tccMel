@@ -12,6 +12,14 @@ import (
 	//"microservicos.com/pkg/util"
 )
 
+// Login godoc
+// @Summary Login do usuário
+// @Description Realiza o login do engresso com cpf e data.
+// @Tags auth
+// @Accept  json
+// @Produce  json
+// @Param   login  body  entites.Loginengresso  true  "Dados de Login"
+// @Router /login [post]
 func Login(ctx *gin.Context) {
 	now := time.Now()
 
