@@ -11,6 +11,14 @@ import (
 	//"microservicos.com/pkg/util"
 )
 
+// Login godoc
+// @Summary Login do usuário
+// @Description Realiza o login do usuário utilizando CPF.
+// @Tags auth
+// @Accept  json
+// @Produce  json
+// @Param   login  body  entites.Login  true  "Dados de Login"
+// @Router /loginAdm [post]
 func LoginAdm(ctx *gin.Context) {
 	var p entites.Login
 	var user entites.Administrador

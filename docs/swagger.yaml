@@ -1,0 +1,45 @@
+basePath: /
+definitions:
+  entites.Login:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    type: object
+host: localhost:5000
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: Esta é a documentação da API dos microserviços.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Microservices API
+  version: "1.0"
+paths:
+  /loginAdm:
+    post:
+      consumes:
+      - application/json
+      description: Realiza o login do usuário utilizando CPF.
+      parameters:
+      - description: Dados de Login
+        in: body
+        name: login
+        required: true
+        schema:
+          $ref: '#/definitions/entites.Login'
+      produces:
+      - application/json
+      responses: {}
+      summary: Login do usuário
+      tags:
+      - auth
+securityDefinitions:
+  BasicAuth:
+    type: basic
+swagger: "2.0"

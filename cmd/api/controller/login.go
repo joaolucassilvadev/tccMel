@@ -22,8 +22,8 @@ func Login(ctx *gin.Context) {
 	db := config.GetDatabase()
 
 	if err := ctx.ShouldBindJSON(&p); err != nil {
-		ctx.JSON(400, gin.H{
-			"error": "cannot bind JSON: " + err.Error(),
+		ctx.JSON(400, entites.ErrorResponse{
+			Error: "cannot bind JSON: " + err.Error(),
 		})
 		return
 	}
@@ -31,12 +31,12 @@ func Login(ctx *gin.Context) {
 	if err := db.Where("cpf= ?", p.Cpf).First(&user).Error; err != nil {
 		fmt.Printf("nome do email %s", p.Cpf)
 		if err == gorm.ErrRecordNotFound {
-			ctx.JSON(400, gin.H{
-				"error": "user not found",
+			ctx.JSON(400, entites.ErrorResponse{
+				Error: "user not found",
 			})
 		} else {
-			ctx.JSON(500, gin.H{
-				"error": "database error: " + err.Error(),
+			ctx.JSON(500, entites.ErrorResponse{
+				Error: "database error: " + err.Error(),
 			})
 		}
 		return
@@ -46,7 +46,7 @@ func Login(ctx *gin.Context) {
 
 	fim, err := time.Parse("2006-01-02", dataForm.DateFim)
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Invalid date_fim format"})
+		ctx.JSON(http.StatusBadRequest, entites.ErrorResponse{Error: "Invalid date_fim format"})
 		return
 	}
 
@@ -57,7 +57,7 @@ func Login(ctx *gin.Context) {
 		return
 	}
 
-	ctx.JSON(http.StatusOK, gin.H{
-		"mensagem": "Login realizado com sucesso",
+	ctx.JSON(http.StatusOK, entites.LoginSuccessResponse{
+		Mensagem: "Login realizado com sucesso",
 	})
 }

@@ -4,6 +4,14 @@ import (
 	"time"
 )
 
+type LoginSuccessResponse struct {
+	Mensagem string `json:"mensagem"`
+}
+
+type ErrorResponse struct {
+	Error string `json:"error"`
+}
+
 type Administrador struct {
 	Name     string `json:"name"`
 	Email    string `json:"email"`

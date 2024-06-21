@@ -2,6 +2,7 @@ package routes
 
 import (
 	"github.com/gin-gonic/gin"
+
 	"microservicos.com/cmd/api/controller"
 	"microservicos.com/internal/repositories"
 )
